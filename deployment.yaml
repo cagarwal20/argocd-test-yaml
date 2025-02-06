@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: fastapi-app
-          image: ksalawu/fastapi:latest
+          image: docker.io/ksalawu/fastapi:latest
           ports:
             - containerPort: 8000
           env:
