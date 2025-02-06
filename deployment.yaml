@@ -21,12 +21,12 @@ spec:
     spec:
       containers:
         - name: fastapi-app
-          image: tiangolo/uvicorn-gunicorn-fastapi:latest  
+          image: ksalawu/fastapi:latest
           ports:
             - containerPort: 8000
           env:
             - name: ENVIRONMENT
-              value: "production"
+              value: "dev"
           resources:
             limits:
               cpu: "500m"
