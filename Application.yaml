@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testargocd  # Name of the application
+  namespace: argocd 
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/cagarwal20/argocd-test-yaml.git  # Git repo used as the source of truth
+    targetRevision: main  # The branch that it uses
+    path: ""  # The files/folder path where changes should be synced with the cluster
+  destination:
+    server: https://kubernetes.default.svc  # Default URL for in-cluster service
+    namespace: fastapi-namespace  # Namespace for the app 
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  # This allows the namespace to be created if it doesn't exist
+    automated:
+      selfHeal: true  # Ensures pods are recreated if they get destroyed
+      prune: true  # Deletes resources if they are removed from Git
