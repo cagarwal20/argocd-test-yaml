@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fastapi-namespace
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-app
+  namespace: fastapi-namespace
+  labels:
+    app: fastapi-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+        - name: fastapi-app
+          image: tiangolo/uvicorn-gunicorn-fastapi:latest  
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "250m"
+              memory: "128Mi"
